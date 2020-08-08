@@ -4,7 +4,7 @@ pragma solidity 0.5.0;
 import "./EthPriceOracleInterface.sol";
 
 // Import the contents of "openzeppelin-solidity/contracts/ownership/Ownable.sol"
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol;"
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 contract CallerContract is Ownable {
   
   // Declare `EthPriceOracleInterface`
@@ -21,6 +21,6 @@ contract CallerContract is Ownable {
     oracleInstance = EthPriceOracleInterface(oracleAddress);
     
     // Fire `newOracleAddressEvent`
-    newOracleAddressEvent(oracleAddress);
+    emit newOracleAddressEvent(oracleAddress);
   }
 }
