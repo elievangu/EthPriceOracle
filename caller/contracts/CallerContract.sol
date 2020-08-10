@@ -44,10 +44,16 @@ contract CallerContract is Ownable {
     emit ReceivedNewRequestIdEvent(id);
   }
   //Declaration of the Callack function
-  function callBack (uint256 _ethPrice, uint256 _id) public {
+  function callBack (uint256 _ethPrice, uint256 _id) public onlyOracle {
     require(myRequests[_id], "This request is not in my pending list");
     ethPrice = _ethPrice;
     delete myRequests[_id];
     emit PriceUpdatedEvent(_ethPrice, _id);
+  }
+  //onlyOracle modifier
+  modifier onlyOracle () {
+    require(msg.sender == oracleAddress, "You are not authorized to call this function.");
+    //Remember to use _; to execute the rest of the function
+    _;
   }
 }
